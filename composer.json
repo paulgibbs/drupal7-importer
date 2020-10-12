@@ -1,0 +1,82 @@
+{
+	"name": "pragmaticweb/pragmatic-drupal7-importer",
+	"description": "Developer framework for importing data from Drupal 7 into WordPress.",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0-only",
+	"homepage": "https://pragmatic.agency/",
+	"authors": [
+		{
+			"name": "Pragmatic",
+			"email": "info@pragmatic.agency"
+		},
+		{
+			"name": "Luca Ricci",
+			"email": "hi@lucaricci.me"
+		},
+		{
+			"name": "Paul Gibbs",
+			"email": "paul@byotos.com"
+		}
+	],
+	"support": {
+		"source": "https://github.com/PragmaticWebLimited/pragmatic-drupal7-importer#readme"
+	},
+	"config": {
+		"autoloader-suffix": "pd7i",
+		"preferred-install": "dist",
+		"process-timeout": 600,
+		"sort-packages": true
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/PragmaticWebLimited/hm-content-import"
+		}
+	],
+	"scripts": {
+		"post-install-cmd": [
+			"cghooks add --ignore-lock"
+		],
+		"post-update-cmd": "cghooks update",
+
+		"lint:php": [
+			"phplint --exclude=vendor .",
+			"phpcs -ps --colors --report-width=80 --standard=phpcompat.xml.dist .",
+			"phpcs -ps --colors --report-width=80 --standard=phpcs.xml.dist ."
+		],
+		"lint": [
+			"composer run lint:php"
+		],
+
+		"test:php": [
+			"phpunit"
+		],
+		"test": [
+			"composer run test:php"
+		]
+	},
+	"extra": {
+		"hooks": {
+			"pre-push": [
+				"composer run lint"
+			]
+		}
+	},
+	"require": {
+		"php": ">=7.3",
+		"composer/installers": "~1.7",
+		"humanmade/hm-content-import": "dev-master"
+	},
+	"require-dev": {
+		"brainmaestro/composer-git-hooks": "~2.8",
+		"humanmade/coding-standards": "~0.7",
+		"overtrue/phplint": "~1.2",
+		"phpunit/phpunit": "~8.5",
+		"wp-phpunit/wp-phpunit": "~5.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"Pragmatic\\Drupal7Importer\\" : "inc/classes"
+		}
+	}
+}

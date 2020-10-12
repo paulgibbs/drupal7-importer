@@ -1,0 +1,21 @@
+# Standard project files.
+.phplint-cache
+/wp-content
+/vendor
+
+# Various Mac OS X.
+.DS_Store
+
+# Various Windows.
+ehthumbs.db
+ehthumbs_vista.db
+Thumbs.db
+Thumbs.db:encryptable
+
+# Various Linux.
+*~
+.directory
+.fuse_hidden*
+.nfs*
+.Trash-*
+cghooks.lock
